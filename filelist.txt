@@ -1,2 +1,0 @@
-rtl/vga.v
-verification/tb.v
