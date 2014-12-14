@@ -22,7 +22,7 @@ module mojo_top(
    output         hsync,
    output         vsync,
    
-   output         uart_rx,    // UART
+   input         uart_rx,    // UART
    output         uart_tx
 
 );
@@ -33,7 +33,7 @@ module mojo_top(
    assign spi_channel = 4'bzzzz;
    
    assign led = 8'b0;
-   
+
    vga vga(
       .clk        (clk     ),
       .rst_n      (rst_n   ),
@@ -44,13 +44,33 @@ module mojo_top(
       .vsync      (vsync   )  
    );
 
+   reg   [20:0]   delay;
+   reg   [7:0]    count;
+   reg            send;
+
+   always @(posedge clk or negedge rst_n) begin
+      if(!rst_n) begin
+         count <= 0;
+         delay <= 0;
+         send  <= 0; 
+      end else begin
+         if(delay == 20'd10000) begin
+            count <= count + 1;
+            delay <= 0;
+            send <= 1;
+         end else begin
+            delay <= delay + 1;
+            send <= 0;
+         end
+      end   
+   end
    uart uart(
       .clk        (clk     ),
       .rst_n      (rst_n   ),
-      .transmit   (1       ),
-      .data       (8'hAA   ),
-      .rx         (rx      ),
-      .tx         (tx      )
+      .transmit   (send    ),
+      .data       (count   ),
+      .rx         (uart_rx ),
+      .tx         (uart_tx )
    );
 
 endmodule
