@@ -1,2 +1,4 @@
-rtl/vga.v
-verification/tb.v
+../src/mojo_top.v
+../src/uart.v
+../src/vga.v
+tb.v
