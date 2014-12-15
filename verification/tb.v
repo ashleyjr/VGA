@@ -39,7 +39,7 @@ module tb;
 		#100 rst_n = 0;
 		#100 rst_n = 1;
 
-      #1000000
+      #30000000
 	   $finish;
 	end
 
