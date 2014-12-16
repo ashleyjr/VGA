@@ -1,4 +1,5 @@
 ../src/mojo_top.v
 ../src/uart.v
 ../src/vga.v
+../src/ram.v
 tb.v

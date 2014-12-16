@@ -66,22 +66,26 @@ module mojo_top(
       .rx         (uart_rx ),
       .tx         (uart_tx )
    );
+
    
-   always @(posedge clk or negedge rst_n) begin
+
+
+   always@(posedge clk or negedge rst_n) begin
       if(!rst_n) begin
          count <= 0;
-         delay <= 0;
-         send  <= 0; 
       end else begin
-         if(delay == 20'd10000) begin
-            count <= count + 1;
-            delay <= 0;
-            send <= 1;
-         end else begin
-            delay <= delay + 1;
-            send <= 0;
-         end
-      end   
+         count <= count + 1;
+      end
    end
 
+
+   ram ram(
+      .clk              (clk        ),
+      .address_in       (count      ),
+      .data_in          (count      ),
+      .write_enable     (1          ),
+      .address_out      (count-8'h0A   ),
+      .data_out         (           )
+   );
+  
 endmodule
