@@ -38,7 +38,7 @@ NET "uart_rx" LOC = P41;
 
 NET "red<0>" LOC = P50;
 NET "red<1>" LOC = P40;
-NET "red<2>" LOC = P35;
+NET "red<2>" LOC = P34;
 NET "red<3>" LOC = P32;
 NET "red<4>" LOC = P29;
 

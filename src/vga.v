@@ -57,21 +57,9 @@ module vga(
 
 
          // Pixel generation
-         if(h_count < 200) begin
-            red   <= v_count << 5;
-            green <= 0;
-            blue  <= 0;
-         end else begin
-            if(h_count < 400) begin
-               red   <= 0;
-               green <= v_count << 5;
-               blue  <= 0;
-            end else begin
-               red   <= 0;
-               green <= 0;
-               blue  <= v_count << 5;
-            end
-         end
+         red   <= red + 1;
+         green <= green + 1;
+         blue  <= blue + 1;
       end
    end
 
