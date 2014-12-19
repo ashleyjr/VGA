@@ -61,9 +61,10 @@ module mojo_top(
    uart uart(
       .clk        (clk     ),
       .rst_n      (rst_n   ),
-      .transmit   (send    ),
-      .data       (count   ),
+      .transmit   (1    ),
+      .data_tx    (count   ),
       .rx         (uart_rx ),
+      .data_rx    (        ),
       .tx         (uart_tx )
    );
 

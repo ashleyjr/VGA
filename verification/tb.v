@@ -11,6 +11,7 @@ module tb;
    wire  [4:0] blue;
    wire        hsync;
    wire        vsync;
+   wire        uart;
    
    mojo_top mojo_top(
       .clk        (clk     ),
@@ -20,7 +21,9 @@ module tb;
 		.green      (green   ),
 		.blue       (blue    ),
 	   .hsync      (hsync   ),
-      .vsync      (vsync   )
+      .vsync      (vsync   ), 
+      .uart_rx    (uart    ),
+      .uart_tx    (uart    )
    );
 
 	initial begin
