@@ -58,7 +58,7 @@ module uart(
                shifter_rx  <= {rx,shifter_rx[7:1]};
                bitcount_rx <= bitcount_rx - 1;
                if(bitcount_rx == 1) begin
-                  data_rx <= {rx,shifter_rx};
+                  data_rx <= {rx,shifter_rx[7:1]};
                end
             end
          end
@@ -75,12 +75,15 @@ module uart(
          // just got a new byte
          if (transmit & ~busy_tx) begin
             shifter_tx <= data_tx[7:0];
-            bitcount_tx <= (1 + 8 + 6);
-            tx <= 0;
+            bitcount_tx <= 10;
          end
    
          if (sending & ser_clk) begin
-            { shifter_tx, tx } <= { 1'h1, shifter_tx };
+            if(bitcount_tx == 10) begin    
+               tx <= 0;
+            end else begin                    
+               { shifter_tx, tx } <= { 1'h1, shifter_tx };
+            end
             bitcount_tx <= bitcount_tx - 1;
          end
       end

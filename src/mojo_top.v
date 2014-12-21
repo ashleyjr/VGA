@@ -32,12 +32,12 @@ module mojo_top(
    assign avr_rx = 1'bz;
    assign spi_channel = 4'bzzzz;
    
-   assign led = 8'b0;
 
    reg   [20:0]   delay;
-   reg   [7:0]    count;
+   reg   [100:0]    count;
    reg            send;
    reg            clk_25;
+   reg    [7:0]   data;
 
    // Divide clock by 2
    always@(posedge clk or negedge rst_n) begin
@@ -47,6 +47,7 @@ module mojo_top(
          clk_25 <= ~clk_25;
       end
    end
+
 
    vga vga(
       .clk_25     (clk_25  ),
@@ -61,10 +62,10 @@ module mojo_top(
    uart uart(
       .clk        (clk     ),
       .rst_n      (rst_n   ),
-      .transmit   (1    ),
-      .data_tx    (count   ),
+      .transmit   (send    ),
+      .data_tx    (led     ),
       .rx         (uart_rx ),
-      .data_rx    (        ),
+      .data_rx    (led     ),
       .tx         (uart_tx )
    );
 
@@ -74,19 +75,27 @@ module mojo_top(
    always@(posedge clk or negedge rst_n) begin
       if(!rst_n) begin
          count <= 0;
+         data <= 0;
       end else begin
-         count <= count + 1;
+         if(count == 100'd10000) begin
+            data <= data + 1;
+            count <= 0;
+            send <= 1;
+         end else begin
+            count <= count + 1;
+            send <= 0;
+         end
       end
    end
 
 
-   ram ram(
-      .clk              (clk        ),
-      .address_in       (count      ),
-      .data_in          (count      ),
-      .write_enable     (1          ),
-      .address_out      (count-8'h0A   ),
-      .data_out         (           )
-   );
+   //ram ram(
+   //   .clk              (clk        ),
+   //   .address_in       (count      ),
+   //   .data_in          (count      ),
+   //   .write_enable     (1          ),
+   //   .address_out      (count-8'h0A   ),
+   //   .data_out         (           )
+   //);
   
 endmodule
