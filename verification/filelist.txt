@@ -1,5 +1,6 @@
-../src/mojo_top.v
-../src/uart.v
-../src/vga.v
-../src/ram.v
+../src/verilog/mojo_top.v
+../src/verilog/uart.v
+../src/verilog/vga.v
+../src/verilog/ram.v
+../src/verilog/Edge.v
 tb.v
