@@ -65,7 +65,6 @@ module mojo_top(
 
 
 
-
    reg   transmit;
    reg   incoming;
    wire  recieved;
@@ -102,6 +101,26 @@ module mojo_top(
       .tx         (uart_tx )
    );
 
+  
+   reg ss1;
+   reg mosi1;
+   wire miso1;
+   reg sck1;
+   wire done1;
+   reg [7:0] din1;
+   wire [7:0] dout1;
+
+   spi spi1(
+      .clk  (clk     ),
+      .rst  (rst_n   ),
+      .ss   (ss1     ),
+      .mosi (mosi1   ),
+      .miso (miso1   ),
+      .sck  (sck1    ),
+      .done (done1   ),
+      .din  (din1    ),
+      .dout (dout1    )
+   );
  
 
    Edge Edge(
@@ -111,8 +130,6 @@ module mojo_top(
       .PixelIn    (in      ),
       .PixelOut   (out     )
    );
-
-
 
 
    reg [7:0] led;

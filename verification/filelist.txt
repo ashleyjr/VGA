@@ -3,4 +3,5 @@
 ../src/verilog/vga.v
 ../src/verilog/ram.v
 ../src/verilog/Edge.v
+../src/verilog/spi.v
 tb.v
