@@ -23,8 +23,13 @@ module mojo_top(
    output         vsync,
    
    input          uart_rx,       // UART
-   output         uart_tx
+   output         uart_tx,
 
+
+   input          mosi,          // SPI
+   output         miso,
+   input          sclk,
+   input          cs
 );
 
    // these signals should be high-z when not used
@@ -102,24 +107,20 @@ module mojo_top(
    );
 
   
-   reg ss1;
-   reg mosi1;
-   wire miso1;
-   reg sck1;
-   wire done1;
-   reg [7:0] din1;
-   wire [7:0] dout1;
+   wire done;
+   reg [7:0] din;
+   wire [7:0] dout;
 
-   spi spi1(
+   spi spi(
       .clk  (clk     ),
       .rst  (rst_n   ),
-      .ss   (ss1     ),
-      .mosi (mosi1   ),
-      .miso (miso1   ),
-      .sck  (sck1    ),
-      .done (done1   ),
-      .din  (din1    ),
-      .dout (dout1    )
+      .ss   (cs      ),
+      .mosi (mosi    ),
+      .miso (miso    ),
+      .sck  (sclk    ),
+      .done (done    ),
+      .din  (din     ),
+      .dout (dout    )
    );
  
 
