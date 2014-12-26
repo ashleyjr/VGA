@@ -190,6 +190,40 @@ module tb;
             mosi  = 0;
             cs    = 1;
 
+
+       
+      data = 8'hAA;
+      #62   cs    = 1;
+            sclk  = 0;
+            mosi  = data[7];
+      #62   sclk  = 1;
+      #62   sclk  = 0;
+            mosi  = data[6];
+      #62   sclk  = 1;
+      #62   sclk  = 0;
+            mosi  = data[5];
+      #62   sclk  = 1;
+      #62   sclk  = 0;
+            mosi  = data[4];
+      #62   sclk  = 1;
+      #62   sclk  = 0;
+            mosi  = data[3];
+      #62   sclk  = 1;
+      #62   sclk  = 0;
+            mosi  = data[2];
+      #62   sclk  = 1;
+      #62   sclk  = 0;
+            mosi  = data[1];
+      #62   sclk  = 1;
+      #62   sclk  = 0;
+            mosi  = data[0];
+      #62   sclk  = 1;
+      #62   sclk  = 0;
+            mosi  = 0;
+            cs    = 1;
+
+
+
       #30000
 	   $finish;
 	end

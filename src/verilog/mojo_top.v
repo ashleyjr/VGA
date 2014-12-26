@@ -2,7 +2,7 @@ module mojo_top(
    input          clk,              // 50 MHz clock input 
    input          rst_n,            // Input from reset button (active low)         
    input          cclk,             // cclk input from AVR, high when AVR is ready
-   output   [7:0] led,              // Outputs to the 8 onboard LEDs
+   //output   [7:0] led,              // Outputs to the 8 onboard LEDs
    output         spi_miso,         // AVR SPI coneections
    input          spi_ss,
    input          spi_mosi,
@@ -108,8 +108,12 @@ module mojo_top(
 
   
    wire done;
-   reg [7:0] din;
+   wire [7:0] din;
    wire [7:0] dout;
+
+   
+   reg [7:0] led;
+   
 
    spi spi(
       .clk  (clk     ),
@@ -119,7 +123,7 @@ module mojo_top(
       .miso (miso    ),
       .sck  (sclk    ),
       .done (done    ),
-      .din  (din     ),
+      .din  (led     ),
       .dout (dout    )
    );
  
@@ -127,27 +131,17 @@ module mojo_top(
    Edge Edge(
       .nReset     (rst_n   ),
       .Clk        (clk     ),
-      .en         (transmit),
-      .PixelIn    (in      ),
-      .PixelOut   (out     )
+      .en         (done    ),
+      .PixelIn    (dout     ),
+      .PixelOut   (din    )
    );
 
 
-   reg [7:0] led;
    always@(posedge clk or negedge rst_n) begin
       if(!rst_n) begin
-         led <= 8'hAA;
-         count <= 0;
-         data <= 0;
+         led <= 8'h00;
       end else begin
-         if(count == 100'd10000) begin
-            data <= data + 1;
-            count <= 0;
-            send <= 1;
-         end else begin
-            count <= count + 1;
-            send <= 0;
-         end
+         if(done) led <= dout;   
       end
    end
 
