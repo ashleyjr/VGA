@@ -19,12 +19,12 @@ module tb;
    mojo_top mojo_top(
       .clk        (clk     ),
 		.rst_n      (rst_n   ),
-      .led        (led     ),
-		.red		   (red     ),
-		.green      (green   ),
-		.blue       (blue    ),
-	   .hsync      (hsync   ),
-      .vsync      (vsync   ), 
+		.led        (led     ),
+      //.red		   (red     ),
+		//.green      (green   ),
+		//.blue       (blue    ),
+	   //.hsync      (hsync   ),
+      //.vsync      (vsync   ), 
       .uart_rx    (uart    ),
       .uart_tx    (uart    ),
       .mosi       (mosi    ),
@@ -224,7 +224,7 @@ module tb;
 
 
 
-      #30000
+      #3000000
 	   $finish;
 	end
 

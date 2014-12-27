@@ -2,7 +2,7 @@ module mojo_top(
    input          clk,              // 50 MHz clock input 
    input          rst_n,            // Input from reset button (active low)         
    input          cclk,             // cclk input from AVR, high when AVR is ready
-   //output   [7:0] led,              // Outputs to the 8 onboard LEDs
+   output   [7:0] led,              // Outputs to the 8 onboard LEDs
    output         spi_miso,         // AVR SPI coneections
    input          spi_ss,
    input          spi_mosi,
@@ -16,11 +16,11 @@ module mojo_top(
 
                                     // Custom
    
-   output   [4:0] red,           // VGA
-   output   [4:0] green,
-   output   [4:0] blue,
-   output         hsync,
-   output         vsync,
+   //output   [4:0] red,           // VGA
+   //output   [4:0] green,
+   //output   [4:0] blue,
+   //output         hsync,
+   //output         vsync,
    
    input          uart_rx,       // UART
    output         uart_tx,
@@ -54,15 +54,15 @@ module mojo_top(
    end
 
 
-   vga vga(
-      .clk_25     (clk_25  ),
-      .rst_n      (rst_n   ),
-      .red        (red     ),
-      .green      (green   ),
-      .blue       (blue    ),
-      .hsync      (hsync   ),
-      .vsync      (vsync   )  
-   );
+   //vga vga(
+   //   .clk_25     (clk_25  ),
+   //   .rst_n      (rst_n   ),
+   //   .red        (red     ),
+   //   .green      (green   ),
+   //   .blue       (blue    ),
+   //   .hsync      (hsync   ),
+   //   .vsync      (vsync   )  
+   //);
 
 
 
@@ -94,11 +94,18 @@ module mojo_top(
    wire  [7:0] in;
    wire  [7:0] out;
 
+
+   reg [7:0] led;
+   
+
+   wire done;
+
+
    uart uart(
       .clk        (clk     ),
       .rst_n      (rst_n   ),
-      .transmit   (transmit),
-      .data_tx    (out     ),
+      .transmit   (done    ),
+      .data_tx    (led     ),
       .rx         (uart_rx ),
       .busy_tx    (busy_tx ),
       .recieved   (recieved),
@@ -106,14 +113,10 @@ module mojo_top(
       .tx         (uart_tx )
    );
 
-  
-   wire done;
-   wire [7:0] din;
+    wire [7:0] din;
    wire [7:0] dout;
 
-   
-   reg [7:0] led;
-   
+ 
 
    spi spi(
       .clk  (clk     ),
