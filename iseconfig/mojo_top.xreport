@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2014-12-26T19:38:22</DateModified>
+  <DateModified>2015-01-10T15:34:00</DateModified>
   <ModuleName>mojo_top</ModuleName>
-  <SummaryTimeStamp>2014-12-23T22:05:24</SummaryTimeStamp>
+  <SummaryTimeStamp>2015-01-10T15:23:11</SummaryTimeStamp>
   <SavedFilePath>/home/ashley/VGA/iseconfig/mojo_top.xreport</SavedFilePath>
   <ImplementationReportsDirectory>/home/ashley/VGA/syn/</ImplementationReportsDirectory>
   <DateInitialized>2012-11-08T12:38:20</DateInitialized>

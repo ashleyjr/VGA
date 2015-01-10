@@ -126,7 +126,7 @@ module mojo_top(
       .miso (miso    ),
       .sck  (sclk    ),
       .done (done    ),
-      .din  (led     ),
+      .din  (din     ),
       .dout (dout    )
    );
  
@@ -140,13 +140,13 @@ module mojo_top(
    );
 
 
-   always@(posedge clk or negedge rst_n) begin
-      if(!rst_n) begin
-         led <= 8'h00;
-      end else begin
-         if(done) led <= dout;   
-      end
-   end
+   //always@(posedge clk or negedge rst_n) begin
+   //   if(!rst_n) begin
+   //      led <= 8'h00;
+   //   end else begin
+   //      if(done) led <= dout;   
+   //   end
+   //end
 
 
    //ram ram(
